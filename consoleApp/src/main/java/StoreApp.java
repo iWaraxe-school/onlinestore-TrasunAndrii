@@ -1,20 +1,18 @@
+import java.util.List;
 
 public class StoreApp {
 
     public static void main(String[] args) {
         Store store = new Store();
-        Category categoryBeer = new Category("Beer");
-        categoryBeer.addToList(RandomStorePopulator.generateRandomProduct(categoryBeer.getName()));
-        categoryBeer.addToList(RandomStorePopulator.generateRandomProduct(categoryBeer.getName()));
-        categoryBeer.addToList(RandomStorePopulator.generateRandomProduct(categoryBeer.getName()));
-        Category categoryFood = new Category("Food");
-        categoryFood.addToList(RandomStorePopulator.generateRandomProduct(categoryFood.getName()));
-        categoryFood.addToList(RandomStorePopulator.generateRandomProduct(categoryFood.getName()));
-        categoryFood.addToList(RandomStorePopulator.generateRandomProduct(categoryFood.getName()));
-        store.addToList(categoryBeer);
-        store.addToList(categoryFood);
-        System.out.println(store);
 
-        StoreHelper.getCategoryList().forEach(category1 -> System.out.println(category1.getName()));
+        List<Category> catList = StoreHelper.getCategoryList();
+        for (Category cat : catList
+        ) {
+            for (int i = 0; i < 5; i++) {
+                cat.addToList(RandomStorePopulator.generateRandomProduct(cat.getName()));
+            }
+            store.addToList(cat);
+        }
+        System.out.println(store);
     }
 }
