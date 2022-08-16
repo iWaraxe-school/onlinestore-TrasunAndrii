@@ -1,10 +1,9 @@
 import com.github.javafaker.Faker;
 
 public class RandomStorePopulator {
+    private final Faker faker = new Faker();
 
-    private static final Faker faker = new Faker();
-
-    private static String generateRandomProductName(String category) {
+    private String generateRandomProductName(String category) {
         switch (category) {
             case "Beer":
                 return faker.beer().name();
@@ -21,15 +20,19 @@ public class RandomStorePopulator {
         }
     }
 
-    private static int generateRandomProductRate() {
+    private int generateRandomProductRate() {
         return faker.number().numberBetween(1, 5);
     }
 
-    private static int generateRandomProductPrice() {
+    private int generateRandomProductPrice() {
         return faker.number().numberBetween(100, 10000);
     }
 
-    public static Product generateRandomProduct(String category) {
+    public int generateMaxProductAmount() {
+        return faker.number().numberBetween(1, 10);
+    }
+
+    public Product generateRandomProduct(String category) {
         return new Product(generateRandomProductName(category), generateRandomProductRate(), generateRandomProductPrice());
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Store {
 
-    private List<Category> categoryList = new ArrayList<>();
+    private final List<Category> categoryList = new ArrayList<>();
 
     public void addToList(Category category) {
         categoryList.add(category);
@@ -19,5 +19,9 @@ public class Store {
             sb.append(category.toString());
         }
         return sb.append("\n]").toString();
+    }
+
+    public void print() {
+        System.out.println(this);
     }
 }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
+public abstract class Category {
 
     final private String name;
     protected List<Product> productList = new ArrayList<>();
