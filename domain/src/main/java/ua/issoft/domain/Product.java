@@ -1,3 +1,5 @@
+package ua.issoft.domain;
+
 public class Product {
 
     private String name;

@@ -1,4 +1,7 @@
+package ua.issoft.store;
+
 import com.github.javafaker.Faker;
+import ua.issoft.domain.Product;
 
 public class RandomStorePopulator {
     private final Faker faker = new Faker();
