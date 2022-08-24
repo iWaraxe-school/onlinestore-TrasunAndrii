@@ -1,10 +1,12 @@
-import java.util.ArrayList;
-import java.util.List;
+package ua.issoft.domain;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Category {
 
     final private String name;
-    protected List<Product> productList = new ArrayList<>();
+    protected Set<Product> productSet = new HashSet<>();
 
     public String getName() {
         return name;
@@ -14,12 +16,16 @@ public abstract class Category {
         this.name = name;
     }
 
+    public Set<Product> getProductSet() {
+        return productSet;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getName());
-        sb.append("(Category): ");
-        for (Product product:productList) {
+        sb.append("(ua.issoft.domain.Category): ");
+        for (Product product: productSet) {
             sb.append("\n");
             sb.append(product.toString());
         }
@@ -27,6 +33,6 @@ public abstract class Category {
     }
 
     public void addToList(Product product) {
-        productList.add(product);
+        productSet.add(product);
     }
 }
