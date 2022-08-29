@@ -1,15 +1,17 @@
 package ua.issoft.consoleApp;
 
-import ua.issoft.store.ConsoleMenu;
 import ua.issoft.store.Store;
 import ua.issoft.store.StoreHelper;
+import ua.issoft.store.consoleMenu.ConsoleMenu;
 
 public class StoreApp {
 
     public static void main(String[] args) {
-        Store store = new Store();
+        Store store = Store.getInstance();
         StoreHelper storeHelper = new StoreHelper();
         store = storeHelper.randomFillStore(store);
-        ConsoleMenu.getStart(store);
+        store.print();
+        ConsoleMenu consoleMenu = new ConsoleMenu(store);
+        consoleMenu.getStart();
     }
 }

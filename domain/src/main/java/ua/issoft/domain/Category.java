@@ -24,7 +24,7 @@ public abstract class Category {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getName());
-        sb.append("(ua.issoft.domain.Category): ");
+        sb.append("(Category): ");
         for (Product product: productSet) {
             sb.append("\n");
             sb.append(product.toString());
