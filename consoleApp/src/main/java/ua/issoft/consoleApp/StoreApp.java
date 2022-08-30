@@ -12,6 +12,7 @@ public class StoreApp {
         store = storeHelper.randomFillStore(store);
         store.print();
         ConsoleMenu consoleMenu = new ConsoleMenu(store);
+        consoleMenu.autoCleaner();
         consoleMenu.getStart();
     }
 }

@@ -1,6 +1,9 @@
 package ua.issoft.store.consoleMenu;
 
 import ua.issoft.store.Store;
+import ua.issoft.store.threads.OrderCleaner;
+
+import java.util.Timer;
 
 import static ua.issoft.store.constants.GlobalConstant.MENU_WELCOME;
 
@@ -25,5 +28,11 @@ public class ConsoleMenu {
         System.out.println(MENU_WELCOME);
         this.stateMenu = new DefaultStateMenu(this, store);
         this.getStateMenu().showMenu();
+    }
+
+    public void autoCleaner() {
+        Timer timer = new Timer();
+        OrderCleaner task = new OrderCleaner(store);
+        timer.schedule(task, 0,120000);
     }
 }

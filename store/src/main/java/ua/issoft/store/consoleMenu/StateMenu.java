@@ -1,7 +1,9 @@
 package ua.issoft.store.consoleMenu;
 
+import ua.issoft.domain.Product;
 import ua.issoft.store.Store;
 import ua.issoft.store.StoreHelper;
+import ua.issoft.store.threads.OrderExecutor;
 
 import java.util.Scanner;
 
@@ -30,7 +32,7 @@ public abstract class StateMenu {
 
     boolean verifyCommand(int command) {
         int commLength = ConsoleCommands.values().length;
-        return command <= commLength && command != getNumberStateMenu();
+        return command <= commLength && command != getNumberStateMenu() || command == 9;
     }
 
     int getNumberStateMenu() {
@@ -58,8 +60,18 @@ public abstract class StateMenu {
                         storeHelper.printTop5(store);
                         consoleMenu.setStateMenu(new TopStateMenu(consoleMenu, store));
                         break;
-
                     case 3:
+                        System.out.println("A random product has been added to Order list.");
+                        Product randomProduct = store.getCategorySet().stream().findAny().get().getProductSet().stream().findAny().get();
+                        OrderExecutor orderExecutor = new OrderExecutor(store, randomProduct);
+                        new Thread(orderExecutor).start();
+                        break;
+                    case 4:
+                        System.out.println("Order list include:");
+                        store.printOrderList();
+                        break;
+
+                    case 9:
                         if (confirmCommand()) {
                             System.out.println("Goodbye...");
                             break firstPoint;
