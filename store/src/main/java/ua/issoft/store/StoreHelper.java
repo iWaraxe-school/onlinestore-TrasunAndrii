@@ -3,6 +3,7 @@ package ua.issoft.store;
 import org.reflections.Reflections;
 import ua.issoft.domain.Category;
 import ua.issoft.domain.Product;
+import ua.issoft.store.dataBase.DataBase;
 import ua.issoft.store.helpers.ProductComparator;
 
 import java.util.*;
@@ -40,7 +41,10 @@ public class StoreHelper {
         }
         return store;
     }
-
+    public Store randomFillStoreViaDB(Store store) {
+        DataBase dataBase = new DataBase();
+        return dataBase.getStoreFromDB(store);
+    }
     private Set<Product> getProductSet (Store store){
         Set<Product> tempProdSet = new HashSet<>();
         Set<Category> storeCategorySet = store.getCategorySet();
