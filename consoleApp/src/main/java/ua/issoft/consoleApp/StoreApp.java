@@ -9,8 +9,7 @@ public class StoreApp {
     public static void main(String[] args) {
         Store store = Store.getInstance();
         StoreHelper storeHelper = new StoreHelper();
-        store = storeHelper.randomFillStore(store);
-        store.print();
+        store = storeHelper.randomFillStoreViaDB(store);
         ConsoleMenu consoleMenu = new ConsoleMenu(store);
         consoleMenu.autoCleaner();
         consoleMenu.getStart();
