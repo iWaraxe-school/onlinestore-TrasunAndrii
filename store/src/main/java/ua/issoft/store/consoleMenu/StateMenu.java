@@ -3,6 +3,8 @@ package ua.issoft.store.consoleMenu;
 import ua.issoft.domain.Product;
 import ua.issoft.store.Store;
 import ua.issoft.store.StoreHelper;
+import ua.issoft.store.http.Client;
+import ua.issoft.store.http.Server;
 import ua.issoft.store.threads.OrderExecutor;
 
 import java.util.Scanner;
@@ -14,6 +16,8 @@ public abstract class StateMenu {
 
     private final Scanner scanner = new Scanner(System.in);
     private final StoreHelper storeHelper = new StoreHelper();
+
+    private final Client client = new Client();
 
     protected ConsoleMenu consoleMenu;
 
@@ -62,18 +66,32 @@ public abstract class StateMenu {
                         break;
                     case 3:
                         System.out.println("A random product has been added to Order list.");
-                        Product randomProduct = store.getCategorySet().stream().findAny().get().getProductSet().stream().findAny().get();
-                        OrderExecutor orderExecutor = new OrderExecutor(store, randomProduct);
-                        new Thread(orderExecutor).start();
+                        boolean isAnyProductPresent = store.getCategorySet().stream().findAny().get().getProductSet().stream().findAny().isPresent();
+                        boolean isAnyCategoryPresent = store.getCategorySet().stream().findAny().isPresent();
+                        if(isAnyCategoryPresent && isAnyProductPresent) {
+                            Product randomProduct = store.getCategorySet().stream().findAny().get().getProductSet().stream().findAny().get();
+                            OrderExecutor orderExecutor = new OrderExecutor(store, randomProduct);
+                            new Thread(orderExecutor).start();
+                        }
                         break;
                     case 4:
                         System.out.println("Order list include:");
                         store.printOrderList();
                         break;
+                    case 5:
+                        System.out.println("POST - /cart");
+                        client.addRandProductToOrder();
+                        break;
+                    case 6:
+                        System.out.println("GET - /category");
+                        client.printCategory();
+                        break;
 
                     case 9:
                         if (confirmCommand()) {
                             System.out.println("Goodbye...");
+                            Server server = Server.getInstance();
+                            server.stopServer();
                             break firstPoint;
                         }
                         break;
